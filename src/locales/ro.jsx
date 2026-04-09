@@ -16,7 +16,7 @@ export const ro = {
     logout: "Deconectare",
   },
   dashboard: {
-    welcome: "Bună venirea",
+    welcome: "Buna ziua",
     totalHours: "Total ore luna aceasta",
     totalDays: "Zile lucrate",
     pending: "În așteptare",
