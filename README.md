@@ -4,7 +4,7 @@ A full-featured time tracking web application built with React, designed for man
 
 ## 🌐 Live Demo
 
-🔗 [View Live App](#) _(coming soon)_
+🔗 [View Live App](https://time-tracker-react-opal.vercel.app)
 
 ## 🔑 Demo Credentials
 
@@ -33,25 +33,6 @@ A full-featured time tracking web application built with React, designed for man
 | jsPDF + html2canvas | PDF generation & export         |
 | localStorage        | Client-side data persistence    |
 | Custom i18n         | Bilingual support (RO/EN)       |
-
-## 📁 Project Structure
-
-src/
-├── pages/
-│ ├── Login.jsx # Authentication page
-│ ├── Dashboard.jsx # Main dashboard with stats
-│ ├── AddHours.jsx # Log worked hours form
-│ ├── History.jsx # History with charts & filters
-│ └── AdminPanel.jsx # Admin management panel
-├── components/
-│ └── ExportPDF.jsx # PDF export component
-├── hooks/
-│ └── useWindowSize.js # Custom responsive hook
-├── locales/
-│ ├── ro.js # Romanian translations
-│ └── en.js # English translations
-└── data/
-└── mockData.js # Mock users & entries
 
 ## 🚀 Getting Started
 
