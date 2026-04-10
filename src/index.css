@@ -16,7 +16,6 @@ body {
   min-height: 100vh;
 }
 
-/* LIGHT MODE */
 body.light {
   --bg-primary: #ffffff;
   --bg-secondary: #f5f6fa;
@@ -32,7 +31,6 @@ body.light {
   --sidebar-bg: #ffffff;
 }
 
-/* DARK MODE */
 body.dark {
   --bg-primary: #0f0f1a;
   --bg-secondary: #1a1a2e;

@@ -70,7 +70,6 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
           {t.dashboard.welcome}, {user.name}! 👋
         </h2>
 
-        {/* CARDURI STATISTICI */}
         <div style={{
           display: "grid",
           gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
@@ -97,7 +96,6 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
           ))}
         </div>
 
-        {/* TABEL */}
         <div style={{
           background: "var(--bg-card)",
           borderRadius: "16px",
@@ -207,7 +205,6 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-secondary)", fontFamily: "'Segoe UI', sans-serif", display: "flex", flexDirection: "column" }}>
 
-      {/* HEADER */}
       <div style={{
         background: "linear-gradient(135deg, #667eea 0%, #f093fb 100%)",
         padding: isMobile ? "12px 16px" : "16px 32px",
@@ -233,7 +230,6 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
 
         <div style={{ display: "flex", alignItems: "center", gap: isMobile ? "8px" : "16px" }}>
 
-          {/* BUTON DARK MODE */}
           <button
             onClick={toggleTheme}
             style={{
@@ -279,7 +275,6 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
 
       <div style={{ display: "flex", flex: 1, position: "relative" }}>
 
-        {/* OVERLAY PE MOBIL */}
         {sidebarOpen && isMobile && (
           <div
             onClick={() => setSidebarOpen(false)}
@@ -292,7 +287,6 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
           />
         )}
 
-        {/* SIDEBAR */}
         {sidebarOpen && (
           <div style={{
             width: isMobile ? "240px" : "220px",
@@ -334,14 +328,12 @@ function Dashboard({ user, onLogout, theme, toggleTheme }) {
           </div>
         )}
 
-        {/* CONTINUT */}
         <div style={{ flex: 1, overflow: "auto", minWidth: 0 }}>
           {renderPage()}
         </div>
 
       </div>
 
-      {/* BOTTOM NAV PE MOBIL */}
       {isMobile && (
         <div style={{
           position: "fixed", bottom: 0, left: 0, right: 0,

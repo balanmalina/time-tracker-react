@@ -7,11 +7,9 @@ function App() {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    // verificam userul salvat
     const saved = localStorage.getItem("pontaj_user");
     if (saved) setCurrentUser(JSON.parse(saved));
 
-    // verificam tema salvata
     const savedTheme = localStorage.getItem("pontaj_theme") || "light";
     setTheme(savedTheme);
     document.body.className = savedTheme;
