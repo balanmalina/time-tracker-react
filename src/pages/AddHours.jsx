@@ -49,17 +49,18 @@ function AddHours({ user, lang, onSaved, isMobile }) {
   };
 
   const inputStyle = {
-    width: "100%",
-    padding: "12px 16px",
-    borderRadius: "12px",
-    border: "2px solid #eee",
-    marginTop: "6px",
-    fontSize: "15px",
-    outline: "none",
-    fontFamily: "'Segoe UI', sans-serif",
-    boxSizing: "border-box",
-    background: "white",
-  };
+  width: "100%",
+  padding: "12px 16px",
+  borderRadius: "12px",
+  border: "2px solid var(--border)",
+  marginTop: "6px",
+  fontSize: "15px",
+  outline: "none",
+  fontFamily: "'Segoe UI', sans-serif",
+  boxSizing: "border-box",
+  background: "var(--input-bg)",
+  color: "var(--text-primary)",
+};
 
   const labelStyle = {
     fontSize: "13px",
@@ -82,7 +83,7 @@ function AddHours({ user, lang, onSaved, isMobile }) {
       </h2>
 
       <div style={{
-        background: "white",
+        background: "var(--bg-card)",
         borderRadius: "16px",
         padding: isMobile ? "20px" : "32px",
         boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
