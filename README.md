@@ -24,6 +24,13 @@ A full-featured time tracking web application built with React, designed for man
 - 🌐 **Bilingual** — Full Romanian / English language support
 - 📱 **Fully Responsive** — Optimized for all screen sizes from 320px
 
+## 🎨 UI & Design
+
+- 🌙 **Dark / Light mode** — toggle with preference saved in localStorage
+- ✨ **Smooth animations** — fade, scale and slide transitions on page load
+- 🎯 **Micro-interactions** — hover effects on buttons and inputs
+- 📱 **Mobile-first** — bottom navigation bar on mobile devices
+
 ## 🛠️ Tech Stack
 
 | Technology          | Purpose                         |
@@ -38,10 +45,10 @@ A full-featured time tracking web application built with React, designed for man
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/pontaj-app.git
+git clone https://github.com/balanmalina/time-tracker-react.git
 
 # Navigate to project folder
-cd pontaj-app
+cd time-tracker-react
 
 # Install dependencies
 npm install
@@ -69,7 +76,6 @@ This application currently uses **localStorage** for data persistence as a front
 - [ ] JWT authentication
 - [ ] Email notifications
 - [ ] Excel export
-- [ ] Dark mode
 - [ ] Team management
 
 ## 👩‍💻 Author

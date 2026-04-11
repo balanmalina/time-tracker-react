@@ -4,10 +4,15 @@ import Dashboard from "./pages/Dashboard";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     const saved = localStorage.getItem("pontaj_user");
     if (saved) setCurrentUser(JSON.parse(saved));
+
+    const savedTheme = localStorage.getItem("pontaj_theme") || "light";
+    setTheme(savedTheme);
+    document.body.className = savedTheme;
   }, []);
 
   const handleLogin = (user) => {
@@ -20,9 +25,25 @@ function App() {
     setCurrentUser(null);
   };
 
-  if (!currentUser) return <Login onLogin={handleLogin} />;
-  return <Dashboard user={currentUser} onLogout={handleLogout} />;
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("pontaj_theme", newTheme);
+    document.body.className = newTheme;
+  };
+
+  if (!currentUser) return (
+    <Login onLogin={handleLogin} theme={theme} toggleTheme={toggleTheme} />
+  );
+
+  return (
+    <Dashboard
+      user={currentUser}
+      onLogout={handleLogout}
+      theme={theme}
+      toggleTheme={toggleTheme}
+    />
+  );
 }
 
 export default App;
-

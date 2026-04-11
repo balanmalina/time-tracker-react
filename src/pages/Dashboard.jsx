@@ -7,7 +7,7 @@ import History from "./History";
 import AdminPanel from "./AdminPanel";
 import useWindowSize from "../hooks/useWindowSize";
 
-function Dashboard({ user, onLogout }) {
+function Dashboard({ user, onLogout, theme, toggleTheme }) {
   const [lang, setLang] = useState("ro");
   const [activePage, setActivePage] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -60,13 +60,13 @@ function Dashboard({ user, onLogout }) {
   ];
 
   const renderPage = () => {
-    if (activePage === "addHours") return <AddHours key={lang} user={user} lang={lang} onSaved={() => setRefresh(r => r + 1)} isMobile={isMobile} />;
-    if (activePage === "history") return <History key={lang} user={user} lang={lang} onRefresh={() => setRefresh(r => r + 1)} isMobile={isMobile} />;
-    if (activePage === "admin") return <AdminPanel key={lang} user={user} lang={lang} onRefresh={() => setRefresh(r => r + 1)} isMobile={isMobile} />;
+    if (activePage === "addHours") return <AddHours key={lang} user={user} lang={lang} onSaved={() => setRefresh(r => r + 1)} isMobile={isMobile} theme={theme} />;
+    if (activePage === "history") return <History key={lang} user={user} lang={lang} onRefresh={() => setRefresh(r => r + 1)} isMobile={isMobile} theme={theme} />;
+    if (activePage === "admin") return <AdminPanel key={lang} user={user} lang={lang} onRefresh={() => setRefresh(r => r + 1)} isMobile={isMobile} theme={theme} />;
 
     return (
       <div style={{ padding: isMobile ? "16px 12px" : "32px" }}>
-        <h2 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: "700", marginBottom: "24px" }}>
+        <h2 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: "700", marginBottom: "24px", color: "var(--text-primary)" }}>
           {t.dashboard.welcome}, {user.name}! 👋
         </h2>
 
@@ -83,40 +83,40 @@ function Dashboard({ user, onLogout }) {
             { label: t.dashboard.pending, value: inAsteptare, color: "#ed8936", icon: "⏳" },
           ].map((card, i) => (
             <div key={i} style={{
-              background: "white",
+              background: "var(--bg-card)",
               borderRadius: "16px",
               padding: isMobile ? "16px" : "24px",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+              boxShadow: "var(--shadow)",
               borderLeft: `4px solid ${card.color}`,
             }}>
               <p style={{ fontSize: "20px", marginBottom: "4px" }}>{card.icon}</p>
               <p style={{ fontSize: isMobile ? "22px" : "32px", fontWeight: "800", color: card.color }}>{card.value}</p>
-              <p style={{ fontSize: "12px", color: "#888", marginTop: "4px" }}>{card.label}</p>
+              <p style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>{card.label}</p>
             </div>
           ))}
         </div>
 
         <div style={{
-          background: "white",
+          background: "var(--bg-card)",
           borderRadius: "16px",
           padding: isMobile ? "16px" : "24px",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+          boxShadow: "var(--shadow)",
           marginBottom: isMobile ? "80px" : "0",
         }}>
-          <h3 style={{ fontSize: "16px", fontWeight: "700", marginBottom: "16px" }}>
+          <h3 style={{ fontSize: "16px", fontWeight: "700", marginBottom: "16px", color: "var(--text-primary)" }}>
             📋 {t.history.title}
           </h3>
 
           {isMobile ? (
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {myEntries.length === 0 ? (
-                <p style={{ color: "#aaa", textAlign: "center", padding: "24px" }}>
+                <p style={{ color: "var(--text-muted)", textAlign: "center", padding: "24px" }}>
                   {lang === "ro" ? "Nu există înregistrări." : "No entries yet."}
                 </p>
               ) : (
                 myEntries.map(entry => (
                   <div key={entry.id} style={{
-                    border: "1px solid #f0f0f0",
+                    border: "1px solid var(--border)",
                     borderRadius: "12px",
                     padding: "14px",
                   }}>
@@ -130,8 +130,8 @@ function Dashboard({ user, onLogout }) {
                         {entry.status === "approved" ? t.history.approved : entry.status === "pending" ? t.history.pending : t.history.rejected}
                       </span>
                     </div>
-                    <p style={{ fontSize: "13px", fontWeight: "600", marginBottom: "4px" }}>{entry.project}</p>
-                    <p style={{ fontSize: "12px", color: "#888", marginBottom: "10px" }}>{entry.date}</p>
+                    <p style={{ fontSize: "13px", fontWeight: "600", marginBottom: "4px", color: "var(--text-primary)" }}>{entry.project}</p>
+                    <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "10px" }}>{entry.date}</p>
                     <button
                       onClick={() => handleDelete(entry)}
                       style={{
@@ -150,25 +150,25 @@ function Dashboard({ user, onLogout }) {
           ) : (
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
               <thead>
-                <tr style={{ background: "#f8f8ff" }}>
+                <tr style={{ background: "var(--table-header)" }}>
                   {[t.history.date, t.history.hours, t.history.project, t.history.status, ""].map((h, i) => (
-                    <th key={i} style={{ padding: "12px 16px", textAlign: "left", fontWeight: "600", color: "#555" }}>{h}</th>
+                    <th key={i} style={{ padding: "12px 16px", textAlign: "left", fontWeight: "600", color: "var(--text-secondary)" }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {myEntries.length === 0 ? (
                   <tr>
-                    <td colSpan={5} style={{ padding: "24px", textAlign: "center", color: "#aaa" }}>
+                    <td colSpan={5} style={{ padding: "24px", textAlign: "center", color: "var(--text-muted)" }}>
                       {lang === "ro" ? "Nu există înregistrări." : "No entries yet."}
                     </td>
                   </tr>
                 ) : (
                   myEntries.map((entry) => (
-                    <tr key={entry.id} style={{ borderTop: "1px solid #f0f0f0" }}>
-                      <td style={{ padding: "12px 16px", textAlign: "left" }}>{entry.date}</td>
-                      <td style={{ padding: "12px 16px", textAlign: "left", fontWeight: "700" }}>{entry.hours}h</td>
-                      <td style={{ padding: "12px 16px", textAlign: "left" }}>{entry.project}</td>
+                    <tr key={entry.id} style={{ borderTop: "1px solid var(--border)" }}>
+                      <td style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-primary)" }}>{entry.date}</td>
+                      <td style={{ padding: "12px 16px", textAlign: "left", fontWeight: "700", color: "var(--text-primary)" }}>{entry.hours}h</td>
+                      <td style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-primary)" }}>{entry.project}</td>
                       <td style={{ padding: "12px 16px", textAlign: "left" }}>
                         <span style={{
                           padding: "4px 12px", borderRadius: "20px", fontSize: "12px", fontWeight: "600",
@@ -203,7 +203,7 @@ function Dashboard({ user, onLogout }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f6fa", fontFamily: "'Segoe UI', sans-serif", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg-secondary)", fontFamily: "'Segoe UI', sans-serif", display: "flex", flexDirection: "column" }}>
 
       <div style={{
         background: "linear-gradient(135deg, #667eea 0%, #f093fb 100%)",
@@ -229,6 +229,18 @@ function Dashboard({ user, onLogout }) {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: isMobile ? "8px" : "16px" }}>
+
+          <button
+            onClick={toggleTheme}
+            style={{
+              background: "rgba(255,255,255,0.2)", border: "none",
+              borderRadius: "8px", padding: "6px 10px",
+              cursor: "pointer", color: "white", fontSize: "16px",
+            }}
+          >
+            {theme === "light" ? "🌙" : "☀️"}
+          </button>
+
           <button
             onClick={() => setLang(lang === "ro" ? "en" : "ro")}
             style={{
@@ -263,7 +275,6 @@ function Dashboard({ user, onLogout }) {
 
       <div style={{ display: "flex", flex: 1, position: "relative" }}>
 
-        {/* OVERLAY PE MOBIL */}
         {sidebarOpen && isMobile && (
           <div
             onClick={() => setSidebarOpen(false)}
@@ -279,8 +290,8 @@ function Dashboard({ user, onLogout }) {
         {sidebarOpen && (
           <div style={{
             width: isMobile ? "240px" : "220px",
-            background: "white",
-            boxShadow: isMobile ? "0 4px 20px rgba(0,0,0,0.1)" : "2px 0 12px rgba(0,0,0,0.06)",
+            background: "var(--sidebar-bg)",
+            boxShadow: isMobile ? "0 4px 20px rgba(0,0,0,0.2)" : "var(--shadow)",
             padding: "16px",
             position: isMobile ? "absolute" : "relative",
             top: 0, left: 0, zIndex: 100,
@@ -300,7 +311,7 @@ function Dashboard({ user, onLogout }) {
                   background: activePage === item.id
                     ? "linear-gradient(135deg, #667eea, #f093fb)"
                     : "transparent",
-                  color: activePage === item.id ? "white" : "#555",
+                  color: activePage === item.id ? "white" : "var(--text-secondary)",
                   fontWeight: "600",
                   fontSize: "14px",
                   cursor: "pointer",
@@ -326,7 +337,7 @@ function Dashboard({ user, onLogout }) {
       {isMobile && (
         <div style={{
           position: "fixed", bottom: 0, left: 0, right: 0,
-          background: "white",
+          background: "var(--sidebar-bg)",
           boxShadow: "0 -2px 12px rgba(0,0,0,0.08)",
           display: "flex",
           zIndex: 200,
@@ -354,7 +365,7 @@ function Dashboard({ user, onLogout }) {
               <span style={{ fontSize: "20px" }}>{item.icon}</span>
               <span style={{
                 fontSize: "10px", fontWeight: "600",
-                color: activePage === item.id ? "#667eea" : "#aaa",
+                color: activePage === item.id ? "#667eea" : "var(--text-muted)",
               }}>
                 {item.label}
               </span>
